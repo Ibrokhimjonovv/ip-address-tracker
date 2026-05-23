@@ -346,7 +346,7 @@ const Home = () => {
                                     <div className="stat-value">{getSecurityScore()}%</div>
                                     <div className="stat-label">Security Score</div>
                                 </div>
-                                <div className="stat-item">
+                                <div className="stat-item mob-font-18">
                                     <div className="stat-value">{connectionSpeed || '--'} Mbps</div>
                                     <div className="stat-label">Est. Speed</div>
                                 </div>
