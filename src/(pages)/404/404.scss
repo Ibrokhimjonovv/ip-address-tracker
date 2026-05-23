@@ -20,7 +20,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
             top: -250px;
             right: -250px;
@@ -31,7 +31,7 @@
             position: absolute;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
             bottom: -200px;
             left: -200px;
@@ -65,10 +65,18 @@
             .digit {
                 display: inline-block;
                 animation: bounce 2s ease infinite;
-                
-                &:nth-child(1) { animation-delay: 0s; }
-                &:nth-child(2) { animation-delay: 0.2s; }
-                &:nth-child(3) { animation-delay: 0.4s; }
+
+                &:nth-child(1) {
+                    animation-delay: 0s;
+                }
+
+                &:nth-child(2) {
+                    animation-delay: 0.2s;
+                }
+
+                &:nth-child(3) {
+                    animation-delay: 0.4s;
+                }
 
                 .error-icon {
                     font-size: 120px;
@@ -91,15 +99,31 @@
                 border-radius: 4px;
                 animation: signalPulse 1.5s ease infinite;
 
-                &:nth-child(1) { animation-delay: 0s; height: 15px; }
-                &:nth-child(2) { animation-delay: 0.2s; height: 25px; }
-                &:nth-child(3) { animation-delay: 0.4s; height: 35px; }
-                &:nth-child(4) { animation-delay: 0.6s; height: 45px; }
-                &:nth-child(5) { 
-                    animation-delay: 0.8s; 
+                &:nth-child(1) {
+                    animation-delay: 0s;
+                    height: 15px;
+                }
+
+                &:nth-child(2) {
+                    animation-delay: 0.2s;
+                    height: 25px;
+                }
+
+                &:nth-child(3) {
+                    animation-delay: 0.4s;
+                    height: 35px;
+                }
+
+                &:nth-child(4) {
+                    animation-delay: 0.6s;
+                    height: 45px;
+                }
+
+                &:nth-child(5) {
+                    animation-delay: 0.8s;
                     height: 55px;
                     background: rgba(255, 100, 100, 0.6);
-                    
+
                     &.offline {
                         background: rgba(255, 100, 100, 0.6);
                     }
@@ -316,6 +340,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -323,39 +348,52 @@
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-20px);
     }
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, 0);
     }
+
     50% {
         transform: translate(30px, 30px);
     }
 }
 
 @keyframes signalPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.5;
     }
+
     50% {
         opacity: 1;
     }
 }
 
 @keyframes shake {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(0);
     }
+
     25% {
         transform: translateX(-10px);
     }
+
     75% {
         transform: translateX(10px);
     }
@@ -365,6 +403,7 @@
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -378,14 +417,14 @@
 
     .error-animation .error-code {
         font-size: 80px;
-        
+
         .digit .error-icon {
             font-size: 80px;
         }
     }
 
     .error-title {
-        font-size: 28px;
+        font-size: 22px;
     }
 
     .error-description {
@@ -399,9 +438,18 @@
 
     .search-box-404 input {
         width: 200px;
-        
+
         &:focus {
             width: 250px;
+        }
+    }
+
+    .not-found-container .error-animation .error-code {
+        font-size: 60px;
+        gap: 0;
+
+        svg {
+            font-size: 60px !important;
         }
     }
 }

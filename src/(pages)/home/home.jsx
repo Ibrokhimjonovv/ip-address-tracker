@@ -18,9 +18,9 @@ import { WiHumidity, WiStrongWind } from 'react-icons/wi'
 // Leaflet ikonlarini sozlash
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
 const Home = () => {
@@ -40,7 +40,7 @@ const Home = () => {
     useEffect(() => {
         fetchIpData();
         checkDarkModePreference();
-        
+
         // Load location history from localStorage
         const savedHistory = localStorage.getItem('ipLocationHistory');
         if (savedHistory) {
@@ -150,11 +150,11 @@ const Home = () => {
                     currency: ipInfoResult.currency || 'N/A',
                     callingCode: ipInfoResult.country_calling_code || 'N/A'
                 };
-                
+
                 setIpData(newIpData);
                 setIpv6(userIpv6);
                 measureConnectionSpeed();
-                
+
                 // Save to history
                 const historyItem = {
                     ip: userIpv4,
@@ -164,11 +164,11 @@ const Home = () => {
                     lat: newIpData.lat,
                     lon: newIpData.lon
                 };
-                
+
                 const updatedHistory = [historyItem, ...locationHistory.slice(0, 4)];
                 setLocationHistory(updatedHistory);
                 localStorage.setItem('ipLocationHistory', JSON.stringify(updatedHistory));
-                
+
                 showNotification('IP information updated!', 'success');
             } else {
                 throw new Error('Failed to fetch IP information');
@@ -197,7 +197,7 @@ const Home = () => {
 
     const shareData = async () => {
         const shareText = `My IP Address: ${ipData?.userIp}\nLocation: ${ipData?.city}, ${ipData?.country}\nISP: ${ipData?.isp}`;
-        
+
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -223,248 +223,271 @@ const Home = () => {
         return Math.min(score, 100);
     };
 
-    if (loading) {
-        return (
-            <div id='ip-checker'>
-                <div className="loading-screen">
-                    <div className="loading-animation">
-                        <div className="loading-ring"></div>
-                        <div className="loading-ring"></div>
-                        <div className="loading-ring"></div>
-                    </div>
-                    <h3>Analyzing your connection...</h3>
-                    <p>Please wait while we gather your IP details</p>
-                </div>
-            </div>
-        )
-    }
+    // if (loading) {
+    //     return (
+    //         <div id='ip-checker'>
+    //             <div className="loading-screen">
+    //                 <div className="loading-animation">
+    //                     <div className="loading-ring"></div>
+    //                     <div className="loading-ring"></div>
+    //                     <div className="loading-ring"></div>
+    //                 </div>
+    //                 <h3>Analyzing your connection...</h3>
+    //                 <p>Please wait while we gather your IP details</p>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
-    if (error) {
-        return (
-            <div id='ip-checker'>
-                <div className="error-screen">
-                    <div className="error-illustration">⚠️</div>
-                    <h3>Something went wrong</h3>
-                    <div className="error-message">{error}</div>
-                    <button onClick={fetchIpData} className="retry-btn">
-                        <FaSyncAlt /> Try Again
-                    </button>
-                </div>
-            </div>
-        )
-    }
+    // if (error) {
+    //     return (
+    //         <div id='ip-checker'>
+    //             <div className="error-screen">
+    //                 <div className="error-illustration">⚠️</div>
+    //                 <h3>Something went wrong</h3>
+    //                 <div className="error-message">{error}</div>
+    //                 <button onClick={fetchIpData} className="retry-btn">
+    //                     <FaSyncAlt /> Try Again
+    //                 </button>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
-        <div id='ip-checker' className={darkMode ? 'dark-theme' : ''}>
-            {/* Notifications */}
-            <div className="notification-container">
-                {notifications.map(notif => (
-                    <div key={notif.id} className={`notification notification-${notif.type}`}>
-                        {notif.message}
+        <div className={`ipCheckerContainer ${darkMode ? 'dark-theme' : ''}`}>
+            <div id='ip-checker' className={darkMode ? 'dark-theme' : ''}>
+                {/* Notifications */}
+                <div className="notification-container">
+                    {notifications.map(notif => (
+                        <div key={notif.id} className={`notification notification-${notif.type}`}>
+                            {notif.message}
+                        </div>
+                    ))}
+                </div>
+
+                {/* Theme Toggle Button */}
+                <button className="theme-toggle" onClick={toggleDarkMode}>
+                    {darkMode ? <MdLightMode /> : <MdDarkMode />}
+                </button>
+
+                {/* Header Section */}
+                <div className="header-section">
+                    <h1 className="main-title">
+                        <FaGlobe className="title-icon" />
+                        IP Address Tracker
+                    </h1>
+                    <p className="subtitle">Discover your digital footprint with advanced analytics</p>
+                </div>
+
+                {loading ? (
+                    <div className="loading-screen">
+                        <div className="loading-animation">
+                            <div className="loading-ring"></div>
+                            <div className="loading-ring"></div>
+                            <div className="loading-ring"></div>
+                        </div>
+                        <h3>Analyzing your connection...</h3>
+                        <p>Please wait while we gather your IP details</p>
                     </div>
-                ))}
-            </div>
-
-            {/* Theme Toggle Button */}
-            <button className="theme-toggle" onClick={toggleDarkMode}>
-                {darkMode ? <MdLightMode /> : <MdDarkMode />}
-            </button>
-
-            {/* Header Section */}
-            <div className="header-section">
-                <h1 className="main-title">
-                    <FaGlobe className="title-icon" />
-                    IP Address Tracker
-                </h1>
-                <p className="subtitle">Discover your digital footprint with advanced analytics</p>
-            </div>
-
-            {ipData && (
-                <div className="content-wrapper">
-                    {/* Quick Actions Bar */}
-                    <div className="quick-actions">
-                        <button onClick={fetchIpData} className="action-btn" disabled={isRefreshing}>
-                            <FaSyncAlt className={isRefreshing ? 'spinning' : ''} />
-                            Refresh
-                        </button>
-                        <button onClick={shareData} className="action-btn">
-                            <FaShareAlt /> Share
-                        </button>
-                        <button onClick={downloadData} className="action-btn">
-                            <FaDownload /> Export
+                ) : error ? (
+                    <div className="error-screen">
+                        <div className="error-illustration">⚠️</div>
+                        <h3>Something went wrong</h3>
+                        <div className="error-message">{error}</div>
+                        <button onClick={fetchIpData} className="retry-btn">
+                            <FaSyncAlt /> Try Again
                         </button>
                     </div>
-
-                    {/* Main IP Display Card */}
-                    <div className="main-ip-card glass-card">
-                        <div className="ip-display">
-                            <div className="ip-label">Your Public IP Address</div>
-                            <div className="ip-value-group">
-                                <span className="ip-value">{ipData.userIp}</span>
-                                <button onClick={() => copyToClipboard(ipData.userIp, 'ipv4')} className="copy-icon">
-                                    {copied.ipv4 ? <FaCheck /> : <FaCopy />}
+                ) : (
+                    ipData && (
+                        <div className="content-wrapper">
+                            {/* Quick Actions Bar */}
+                            <div className="quick-actions">
+                                <button onClick={fetchIpData} className="action-btn" disabled={isRefreshing}>
+                                    <FaSyncAlt className={isRefreshing ? 'spinning' : ''} />
+                                    Refresh
+                                </button>
+                                <button onClick={shareData} className="action-btn">
+                                    <FaShareAlt /> Share
+                                </button>
+                                <button onClick={downloadData} className="action-btn">
+                                    <FaDownload /> Export
                                 </button>
                             </div>
-                            {ipv6 && (
-                                <div className="ipv6-group">
-                                    <div className="ip-label-small">IPv6 (if available)</div>
+
+                            {/* Main IP Display Card */}
+                            <div className="main-ip-card glass-card">
+                                <div className="ip-display">
+                                    <div className="ip-label">Your Public IP Address</div>
                                     <div className="ip-value-group">
-                                        <span className="ip-value ipv6-value">{ipv6}</span>
-                                        <button onClick={() => copyToClipboard(ipv6, 'ipv6')} className="copy-icon">
-                                            {copied.ipv6 ? <FaCheck /> : <FaCopy />}
+                                        <span className="ip-value">{ipData.userIp}</span>
+                                        <button onClick={() => copyToClipboard(ipData.userIp, 'ipv4')} className="copy-icon">
+                                            {copied.ipv4 ? <FaCheck /> : <FaCopy />}
                                         </button>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Stats Overview */}
-                    <div className="stats-overview">
-                        <div className="stat-item">
-                            <div className="stat-value">{getSecurityScore()}%</div>
-                            <div className="stat-label">Security Score</div>
-                        </div>
-                        <div className="stat-item">
-                            <div className="stat-value">{connectionSpeed || '--'} Mbps</div>
-                            <div className="stat-label">Est. Speed</div>
-                        </div>
-                        <div className="stat-item">
-                            <div className="stat-value">{ipv6 ? '✓' : '✗'}</div>
-                            <div className="stat-label">IPv6 Support</div>
-                        </div>
-                        <div className="stat-item">
-                            <div className="stat-value">{ipData.countryCode}</div>
-                            <div className="stat-label">Country Code</div>
-                        </div>
-                    </div>
-
-                    {/* Tabs Section */}
-                    <div className="tabs-container">
-                        <div className="tabs">
-                            <button className={`tab ${activeTab === 'info' ? 'active' : ''}`} onClick={() => setActiveTab('info')}>
-                                <FaInfoCircle /> Details
-                            </button>
-                            <button className={`tab ${activeTab === 'location' ? 'active' : ''}`} onClick={() => setActiveTab('location')}>
-                                <MdLocationOn /> Location
-                            </button>
-                            <button className={`tab ${activeTab === 'history' ? 'active' : ''}`} onClick={() => setActiveTab('history')}>
-                                <FaClock /> History
-                            </button>
-                        </div>
-
-                        <div className="tab-content">
-                            {activeTab === 'info' && (
-                                <div className="info-tab">
-                                    <div className="info-grid">
-                                        <div className="info-row">
-                                            <span className="info-label"><FaNetworkWired /> ISP:</span>
-                                            <span className="info-value">{ipData.isp}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label"><FaFlag /> Country:</span>
-                                            <span className="info-value">{ipData.country}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label"><FaCity /> City:</span>
-                                            <span className="info-value">{ipData.city}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label"><MdLocationOn /> Region:</span>
-                                            <span className="info-value">{ipData.regionName}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label"><FaClock /> Timezone:</span>
-                                            <span className="info-value">{ipData.timezone}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label">📮 Postal Code:</span>
-                                            <span className="info-value">{ipData.postal}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label">💰 Currency:</span>
-                                            <span className="info-value">{ipData.currency}</span>
-                                        </div>
-                                        <div className="info-row">
-                                            <span className="info-label">📞 Calling Code:</span>
-                                            <span className="info-value">{ipData.callingCode}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            {activeTab === 'location' && (
-                                <div className="location-tab">
-                                    <div className="map-wrapper">
-                                        {ipData.lat && ipData.lon && (
-                                            <MapContainer
-                                                center={[ipData.lat, ipData.lon]}
-                                                zoom={8}
-                                                className="location-map"
-                                                scrollWheelZoom={true}
-                                            >
-                                                <TileLayer
-                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                    attribution='© OpenStreetMap'
-                                                />
-                                                <Marker position={[ipData.lat, ipData.lon]}>
-                                                    <Popup>
-                                                        <div className="map-popup">
-                                                            <strong>{ipData.country}</strong><br />
-                                                            📍 {ipData.city}<br />
-                                                            🌐 {ipData.isp}
-                                                        </div>
-                                                    </Popup>
-                                                </Marker>
-                                            </MapContainer>
-                                        )}
-                                    </div>
-                                    <div className="location-coords">
-                                        <p>📍 Latitude: {ipData.lat}</p>
-                                        <p>📍 Longitude: {ipData.lon}</p>
-                                    </div>
-                                </div>
-                            )}
-
-                            {activeTab === 'history' && (
-                                <div className="history-tab">
-                                    {locationHistory.length > 0 ? (
-                                        locationHistory.map((item, index) => (
-                                            <div key={index} className="history-item">
-                                                <div className="history-ip">{item.ip}</div>
-                                                <div className="history-location">{item.city}, {item.country}</div>
-                                                <div className="history-time">{new Date(item.timestamp).toLocaleString()}</div>
+                                    {ipv6 && (
+                                        <div className="ipv6-group">
+                                            <div className="ip-label-small">IPv6 (if available)</div>
+                                            <div className="ip-value-group">
+                                                <span className="ip-value ipv6-value">{ipv6}</span>
+                                                <button onClick={() => copyToClipboard(ipv6, 'ipv6')} className="copy-icon">
+                                                    {copied.ipv6 ? <FaCheck /> : <FaCopy />}
+                                                </button>
                                             </div>
-                                        ))
-                                    ) : (
-                                        <div className="empty-history">No history yet</div>
+                                        </div>
                                     )}
                                 </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
+                            </div>
 
-            {/* FAQ Section */}
-            <div className="faq-section">
-                <h2>Frequently Asked Questions</h2>
-                <div className="faq-grid">
-                    <div className="faq-card">
-                        <h3>What is an IP address?</h3>
-                        <p>An IP address is a unique identifier assigned to each device connected to the internet, allowing devices to communicate with each other.</p>
-                    </div>
-                    <div className="faq-card">
-                        <h3>Is my IP address permanent?</h3>
-                        <p>Most home IP addresses are dynamic and can change periodically. Static IPs are usually reserved for businesses or special services.</p>
-                    </div>
-                    <div className="faq-card">
-                        <h3>Can someone track me with my IP?</h3>
-                        <p>Your IP can reveal your general location (city level), but not your exact physical address. Using a VPN can help protect your privacy.</p>
-                    </div>
-                    <div className="faq-card">
-                        <h3>What's the difference between IPv4 and IPv6?</h3>
-                        <p>IPv4 uses 32-bit addresses (limited to ~4 billion), while IPv6 uses 128-bit addresses, providing virtually unlimited unique addresses.</p>
+                            {/* Stats Overview */}
+                            <div className="stats-overview">
+                                <div className="stat-item">
+                                    <div className="stat-value">{getSecurityScore()}%</div>
+                                    <div className="stat-label">Security Score</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-value">{connectionSpeed || '--'} Mbps</div>
+                                    <div className="stat-label">Est. Speed</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-value">{ipv6 ? '✓' : '✗'}</div>
+                                    <div className="stat-label">IPv6 Support</div>
+                                </div>
+                                <div className="stat-item">
+                                    <div className="stat-value">{ipData.countryCode}</div>
+                                    <div className="stat-label">Country Code</div>
+                                </div>
+                            </div>
+
+                            {/* Tabs Section */}
+                            <div className="tabs-container">
+                                <div className="tabs">
+                                    <button className={`tab ${activeTab === 'info' ? 'active' : ''}`} onClick={() => setActiveTab('info')}>
+                                        <FaInfoCircle /> Details
+                                    </button>
+                                    <button className={`tab ${activeTab === 'location' ? 'active' : ''}`} onClick={() => setActiveTab('location')}>
+                                        <MdLocationOn /> Location
+                                    </button>
+                                    <button className={`tab ${activeTab === 'history' ? 'active' : ''}`} onClick={() => setActiveTab('history')}>
+                                        <FaClock /> History
+                                    </button>
+                                </div>
+
+                                <div className="tab-content">
+                                    {activeTab === 'info' && (
+                                        <div className="info-tab">
+                                            <div className="info-grid">
+                                                <div className="info-row">
+                                                    <span className="info-label"><FaNetworkWired /> ISP:</span>
+                                                    <span className="info-value">{ipData.isp}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label"><FaFlag /> Country:</span>
+                                                    <span className="info-value">{ipData.country}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label"><FaCity /> City:</span>
+                                                    <span className="info-value">{ipData.city}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label"><MdLocationOn /> Region:</span>
+                                                    <span className="info-value">{ipData.regionName}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label"><FaClock /> Timezone:</span>
+                                                    <span className="info-value">{ipData.timezone}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label">📮 Postal Code:</span>
+                                                    <span className="info-value">{ipData.postal}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label">💰 Currency:</span>
+                                                    <span className="info-value">{ipData.currency}</span>
+                                                </div>
+                                                <div className="info-row">
+                                                    <span className="info-label">📞 Calling Code:</span>
+                                                    <span className="info-value">{ipData.callingCode}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {activeTab === 'location' && (
+                                        <div className="location-tab">
+                                            <div className="map-wrapper">
+                                                {ipData.lat && ipData.lon && (
+                                                    <MapContainer
+                                                        center={[ipData.lat, ipData.lon]}
+                                                        zoom={8}
+                                                        className="location-map"
+                                                        scrollWheelZoom={true}
+                                                    >
+                                                        <TileLayer
+                                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                            attribution='© OpenStreetMap'
+                                                        />
+                                                        <Marker position={[ipData.lat, ipData.lon]}>
+                                                            <Popup>
+                                                                <div className="map-popup">
+                                                                    <strong>{ipData.country}</strong><br />
+                                                                    📍 {ipData.city}<br />
+                                                                    🌐 {ipData.isp}
+                                                                </div>
+                                                            </Popup>
+                                                        </Marker>
+                                                    </MapContainer>
+                                                )}
+                                            </div>
+                                            <div className="location-coords">
+                                                <p>📍 Latitude: {ipData.lat}</p>
+                                                <p>📍 Longitude: {ipData.lon}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {activeTab === 'history' && (
+                                        <div className="history-tab">
+                                            {locationHistory.length > 0 ? (
+                                                locationHistory.map((item, index) => (
+                                                    <div key={index} className="history-item">
+                                                        <div className="history-ip">{item.ip}</div>
+                                                        <div className="history-location">{item.city}, {item.country}</div>
+                                                        <div className="history-time">{new Date(item.timestamp).toLocaleString()}</div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="empty-history">No history yet</div>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                )}
+
+                {/* FAQ Section */}
+                <div className="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div className="faq-grid">
+                        <div className="faq-card">
+                            <h3>What is an IP address?</h3>
+                            <p>An IP address is a unique identifier assigned to each device connected to the internet, allowing devices to communicate with each other.</p>
+                        </div>
+                        <div className="faq-card">
+                            <h3>Is my IP address permanent?</h3>
+                            <p>Most home IP addresses are dynamic and can change periodically. Static IPs are usually reserved for businesses or special services.</p>
+                        </div>
+                        <div className="faq-card">
+                            <h3>Can someone track me with my IP?</h3>
+                            <p>Your IP can reveal your general location (city level), but not your exact physical address. Using a VPN can help protect your privacy.</p>
+                        </div>
+                        <div className="faq-card">
+                            <h3>What's the difference between IPv4 and IPv6?</h3>
+                            <p>IPv4 uses 32-bit addresses (limited to ~4 billion), while IPv6 uses 128-bit addresses, providing virtually unlimited unique addresses.</p>
+                        </div>
                     </div>
                 </div>
             </div>
