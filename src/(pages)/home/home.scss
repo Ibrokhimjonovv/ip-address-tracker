@@ -656,7 +656,7 @@
     .stats-overview {
       grid-template-columns: repeat(2, 1fr);
 
-      .mob-font-18 {
+      .mob-font-18 .stat-value{
         font-size: 18px !important;
       }
     }
