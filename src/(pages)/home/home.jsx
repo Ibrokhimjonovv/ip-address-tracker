@@ -29,7 +29,7 @@ const Home = () => {
     const [error, setError] = useState(null);
     const [ipv6, setIpv6] = useState(null);
     const [copied, setCopied] = useState({ ipv4: false, ipv6: false });
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const [connectionSpeed, setConnectionSpeed] = useState(null);
     const [weatherData, setWeatherData] = useState(null);
     const [activeTab, setActiveTab] = useState('info');
