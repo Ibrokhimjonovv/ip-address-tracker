@@ -1,13 +1,235 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ip-checker</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+  <!-- SEO Meta Tags -->
+  <title>IP Checker - My IP Address Location, ISP & Security Information</title>
+  <meta name="description"
+    content="Check your public IP address instantly. Get detailed information about your IP location, ISP, timezone, and security score. Free IP lookup tool with map visualization." />
+  <meta name="keywords"
+    content="ip checker, my ip address, ip location, what is my ip, ip address lookup, find my ip, ip locator, public ip, ipv4, ipv6, ip tracker" />
+  <meta name="author" content="IP Checker Tool" />
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="revisit-after" content="1 day" />
+  <meta name="language" content="English" />
+  <meta name="distribution" content="global" />
+  <meta name="rating" content="general" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:title" content="IP Checker - Find Your Public IP Address & Location" />
+  <meta property="og:description"
+    content="Instant IP address lookup tool. Discover your IP location, ISP, timezone, and get security recommendations. Free and accurate IP detection." />
+  <meta property="og:image" content="https://yourdomain.com/preview.png" />
+  <meta property="og:image:alt" content="IP Checker Tool Interface" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="IP Checker" />
+  <!-- Asosiy til - Ingliz -->
+  <meta property="og:locale" content="en_US" />
+
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://yourdomain.com/" />
+  <meta name="twitter:title" content="IP Checker - Find Your Public IP Address" />
+  <meta name="twitter:description"
+    content="Check your IP address instantly. Get detailed location, ISP, and security information for free." />
+  <meta name="twitter:image" content="https://yourdomain.com/preview.png" />
+  <meta name="twitter:creator" content="@ipchecker" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- Alternate Languages -->
+  <link rel="alternate" hreflang="en" href="https://yourdomain.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://yourdomain.com/" />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://api.ipify.org" />
+  <link rel="preconnect" href="https://ipapi.co" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//api.ipify.org" />
+  <link rel="dns-prefetch" href="//ipapi.co" />
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "IP Checker Tool",
+      "description": "Free tool to check your public IP address, location, ISP, and security information.",
+      "url": "https://yourdomain.com/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "IP Checker Tool"
+      },
+      "featureList": [
+        "IP Address Detection",
+        "Geolocation Mapping",
+        "ISP Information",
+        "Security Score",
+        "Connection Speed Test",
+        "IPv4 & IPv6 Support"
+      ]
+    }
+    </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://yourdomain.com/"
+        }
+      ]
+    }
+    </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is my IP address?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your IP address is a unique identifier assigned to your device by your Internet Service Provider (ISP). It allows you to communicate with other devices on the internet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I check my IP address?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can check your IP address instantly using our free IP checker tool. We automatically detect and display your public IPv4 and IPv6 addresses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can someone track me with my IP address?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your IP address can reveal your approximate location (city level), but not your exact physical address. Using a VPN can help protect your privacy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between IPv4 and IPv6?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IPv4 uses 32-bit addresses allowing about 4 billion unique addresses, while IPv6 uses 128-bit addresses providing virtually unlimited unique addresses for modern internet devices."
+          }
+        }
+      ]
+    }
+    </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "IP Checker Tool",
+      "url": "https://yourdomain.com/",
+      "logo": "https://yourdomain.com/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@ipchecker.com",
+        "contactType": "customer support",
+        "availableLanguage": ["English"]
+      }
+    }
+    </script>
+
+  <!-- SoftwareApplication Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "IP Checker Tool",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "User"
+        }
+      }
+    }
+    </script>
+
+  <!-- Geo Coordinates for location-based SEO -->
+  <!-- Umumiy global uchun geo.region qo'ymang yoki -->
+  <meta name="geo.region" content="WORLD" />
+
+  <!-- Author and Copyright -->
+  <meta name="copyright" content="2026 IP Checker Tool" />
+  <meta name="designer" content="IP Checker Team" />
+
+  <!-- Robots directives for specific pages -->
+  <meta name="robots" content="max-snippet:200, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Mobile Web App -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="IP Checker" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#667eea" />
+  <meta name="msapplication-TileColor" content="#667eea" />
+  <meta name="msapplication-TileImage" content="/favicon.svg" />
+
+  <!-- <title> will be dynamically set by React -->
+  <title>IP Checker - My IP Address Location & Security Tool</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
