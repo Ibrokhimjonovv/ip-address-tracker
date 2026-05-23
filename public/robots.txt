@@ -1,7 +1,7 @@
 <!-- public/robots.txt -->
 User-agent: *
 Allow: /
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://iplook-up.vercel.app/sitemap.xml
 
 # Crawl delay for bots (optional)
 Crawl-delay: 1
