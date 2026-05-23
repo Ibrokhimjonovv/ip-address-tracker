@@ -1,5 +1,6 @@
 .ipCheckerContainer {
   background: #fff;
+  padding-top: 20px;
 
   &.dark-theme {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -634,6 +635,7 @@
 // Responsive Design
 @media (max-width: 768px) {
   #ip-checker {
+    padding-top: 25px;
     padding: 10px;
 
     .header-section .main-title {
