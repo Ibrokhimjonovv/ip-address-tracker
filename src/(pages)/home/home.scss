@@ -1,5 +1,5 @@
 .leaflet-bottom.leaflet-right {
-    display: none !important;
+  display: none !important;
 }
 
 
@@ -21,18 +21,21 @@
     .glass-card,
     .stats-overview .stat-item,
     .main-ip-card,
-    .faq-section .faq-grid .faq-card, .location-coords {
+    .faq-section .faq-grid .faq-card,
+    .location-coords {
       background: rgba(255, 255, 255, 0.08) !important;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
 
-      h3, .info-label {
+      h3,
+      .info-label {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
 
-      .info-value, p {
+      .info-value,
+      p {
         color: #ffff !important;
       }
 
@@ -650,6 +653,10 @@
 
     .faq-section .faq-grid {
       grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+      gap: 10px;
     }
   }
 }
